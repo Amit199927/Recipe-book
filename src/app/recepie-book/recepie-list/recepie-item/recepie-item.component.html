@@ -1,0 +1,20 @@
+<!-- <p>recepie-item works!</p> -->
+
+<a
+style="cursor: pointer;"
+routerLinkActivated="active"
+class="list-group-item clearfix"
+[routerLink]="[index]"
+>
+<div class="pull-left">
+  <h4 class="list-group-item-heading">{{ recepie.name }}</h4>
+  <p class="list-group-item-text">{{ recepie.description }}</p>
+</div>
+<span class="pull-right">
+  <img
+    [src]="recepie.imagePath"
+    alt="{{ recepie.name }}"
+    class="img-responsive"
+    style="max-height: 50px;">
+</span>
+</a>

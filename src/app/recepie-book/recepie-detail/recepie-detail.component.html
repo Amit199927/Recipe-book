@@ -1,0 +1,49 @@
+<!-- <p>recepie-detail works!</p> -->
+
+<div class="row">
+    <div class="col-xs-12">
+      <img src="{{recepie.imagePath}}" alt="{{recepie.name}}" class="img-responsive">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>{{recepie.name}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div 
+      class="btn-group"
+      appDropdown>
+        <button
+          type="button"
+          class="btn btn-primary dropdown-toggle">
+          Manage Recipe <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a style="cursor: pointer;"  (click)="addToShoppingList()">To Shopping List</a></li>
+          <li><a style="cursor: pointer;" (click)="onEditRecepie()">Edit Recipe</a></li>
+          <li><a style="cursor: pointer;" (click)="onDeleteRecepie()">Delete Recipe</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12" >
+      <p>{{recepie.description}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+        <ul class="list-group">
+            <li
+              class="list-group-item"
+              *ngFor="let ingredient of recepie.ingredients">
+              {{ ingredient.name }} - {{ ingredient.amount }}kg
+            </li>
+          </ul>
+    </div>
+  </div>
+  
+
+
