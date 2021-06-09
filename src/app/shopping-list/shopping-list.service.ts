@@ -1,38 +1,49 @@
 
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { Ingredient } from "../shared/ingredient.model";
 
-export class ShoppingService{
-    private ingredients: Ingredient[]=[
-        new Ingredient("Onion",45),
-        new Ingredient("Tomato",20),
-      ];
+@Injectable({providedIn:'root'})
 
-    startedEditing=new Subject<number>();  
+export class ShoppingService{
+    // private ingredients: Ingredient[]=[
+    //     new Ingredient("Onion",45),
+    //     new Ingredient("Tomato",20),
+    //   ];
+    private ingredients = [];
+    private ingredient = {};
+
+    constructor(private http: HttpClient){}
+
+    startedEditing=new Subject<string>();  
     
     getIngredients(){
         return this.ingredients;
     }  
 
-    getIngredient(index:number){
-        return this.ingredients[index];
+    getIngredient(index:string){
+        this.http.get('http://localhost:3000/getIngredient/' + index).subscribe((res) => {
+            console.log(res)
+            this.ingredient = res;
+        })
     }
 
-    addIngredient(ingredient:Ingredient){
-        this.ingredients.push(ingredient);
+    addIngredient(ingredient: any){
+        this.http.post("http://localhost:3000/newShopping",ingredient).subscribe()
     
     }
 
     updateIngredient(index: number, newIngredient: Ingredient) {
-        this.ingredients[index] = newIngredient;
+        // this.ingredients[index] = newIngredient;
     }
 
     addIngredients(ingredients:Ingredient[]){
-        this.ingredients.push(...ingredients);
+        // this.ingredients.push(...ingredients);
     }
 
     deleteIngredient(index:number){
-        this.ingredients.splice(index,1);
+        // this.ingredients.splice(index,1);
     }
 
 }
