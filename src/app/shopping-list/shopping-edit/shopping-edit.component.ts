@@ -16,6 +16,7 @@ export class ShoppingEditComponent implements OnInit {
   editMode=false
   editedItem!:Ingredient;
   ingredient:any;
+  index!:string;
   @ViewChild('f') slform!:NgForm
   constructor(private shoppingService:ShoppingService, private http: HttpClient) { }
 
@@ -30,7 +31,7 @@ export class ShoppingEditComponent implements OnInit {
       // this.slform.setValue({
       //   name:this.editedItem.name,
       //   amount: this.editedItem.amount,
-      this.http.get("https://localhost:3000/getShoppingById/"+index).subscribe(res=>{
+      this.http.get("https://localhost:3000/getShoppingById/"+this.editedItemIndex).subscribe(res=>{
         console.log(res)
         this.ingredient=res;
         this.slform.setValue({
@@ -74,11 +75,11 @@ export class ShoppingEditComponent implements OnInit {
 
   onDelete() {
     // this.shoppingService.deleteIngredient(this.editedItemIndex);
-
-
     console.log(this.editedItemIndex);
+    
     this.http.post("http://localhost:3000/deleteShopping/"+ this.editedItemIndex,{})
     .subscribe((res)=>{
+      
       alert("successfully deleted item");
     })
     this.onClear();

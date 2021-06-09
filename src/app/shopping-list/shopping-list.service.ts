@@ -19,7 +19,7 @@ export class ShoppingService{
     startedEditing=new Subject<string>();  
     
     getIngredients(){
-        return this.ingredients;
+        return this.ingredients.slice();
     }  
 
     getIngredient(index:string){
@@ -42,7 +42,7 @@ export class ShoppingService{
         // this.ingredients.push(...ingredients);
     }
 
-    deleteIngredient(index:number){
+    deleteIngredient(index:string){
         // this.ingredients.splice(index,1);
     }
 
